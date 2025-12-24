@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Special Invitation</title>
+    <link href="https://fonts.cdnfonts.com/css/vcr-osd-mono" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            background: radial-gradient(circle at top, #1a1a2e, #0b0b0f);
+            color: white;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .card {
+            max-width: 420px;
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid #cdb4ff;
+            background: rgba(255, 255, 255, .05);
+            box-shadow: 0 0 25px rgba(205, 180, 255, .3);
+            animation: fadeUp .6s ease;
+        }
+
+        h1 {
+            font-family: 'VCR OSD Mono', monospace;
+            color: #ff7ad9;
+            text-align: center;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 14px;
+            border: none;
+            border-radius: 40px;
+            background: linear-gradient(135deg, #ff7ad9, #cdb4ff);
+            font-size: 16px;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #ff7ad9;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <h1>🍽️ Date Invitation</h1>
+        <p>
+            Cie, tepat sasaran nih ngambil pilihannya :p
+
+            <br><br>
+            Kalau begini kan, terpaksa deh harus makan bareng dan ngerawat abel bareng aku. Gimana? Setuju, kan?<br><br>
+
+        </p>
+
+        <button onclick="alert('HAHAHA OKAY! KITA KE KFC YA NANTI SAMA ABEL')">
+            MANA BISA NOLAK #MANAPATEN
+        </button>
+    </div>
+
+</body>
+
+</html>

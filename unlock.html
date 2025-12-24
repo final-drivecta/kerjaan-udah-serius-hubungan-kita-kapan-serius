@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Secret Level</title>
+    <link href="https://fonts.cdnfonts.com/css/vcr-osd-mono" rel="stylesheet">
+
+    <style>
+        :root {
+            --pink: #ff7ad9;
+            --purple: #cdb4ff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #0b0b0f;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .box {
+            border: 2px solid var(--purple);
+            padding: 32px;
+            border-radius: 18px;
+            box-shadow: 0 0 30px rgba(205, 180, 255, .35);
+            background: rgba(255, 255, 255, .04);
+            animation: popUp .8s ease;
+            width: 300px;
+        }
+
+        @keyframes popUp {
+            from {
+                transform: scale(.9);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            font-family: 'VCR OSD Mono', monospace;
+            color: var(--pink);
+            margin-bottom: 8px;
+        }
+
+        p {
+            font-size: 13px;
+            color: #ccc;
+        }
+
+        input {
+            margin-top: 18px;
+            padding: 12px;
+            width: 100%;
+            border-radius: 10px;
+            border: none;
+            text-align: center;
+            outline: none;
+            font-size: 14px;
+        }
+
+        input:focus {
+            box-shadow: 0 0 12px var(--purple);
+        }
+
+        button {
+            margin-top: 18px;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(135deg, var(--pink), var(--purple));
+            cursor: pointer;
+            font-size: 15px;
+            transition: .2s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--pink);
+        }
+
+        button:active {
+            transform: scale(.95);
+        }
+
+        /* ERROR MESSAGE */
+        .error {
+            margin-top: 12px;
+            font-size: 12px;
+            color: #ff9aa2;
+            display: none;
+        }
+
+        /* SHAKE */
+        .shake {
+            animation: shake .4s;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-6px);
+            }
+
+            50% {
+                transform: translateX(6px);
+            }
+
+            75% {
+                transform: translateX(-6px);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box" id="box">
+        <h1>MIMINYA ABEL SIAPA SIH (BOLEH KEPEDEAN)</h1>
+        <p>HALO SAYANG</p>
+
+        <input type="text" id="name" placeholder="UDAH SIAP AMBIL PROMO (RYUKEN) MU?"
+            onkeydown="if(event.key==='Enter') unlock()">
+
+        <button onclick="unlock()">ENTER</button>
+
+        <div class="error" id="error">
+            ❌ Nama tidak cocok, coba lagi ❤️
+        </div>
+    </div>
+
+    <script>
+        function unlock() {
+            const namaBenar = "SAHARA"; // GANTI NAMA PACAR
+            const input = document.getElementById('name').value.trim().toLowerCase();
+            const box = document.getElementById('box');
+            const error = document.getElementById('error');
+
+            error.style.display = "none";
+
+            if (input === namaBenar.toLowerCase()) {
+                box.style.boxShadow = "0 0 40px #ff7ad9";
+                setTimeout(() => {
+                    window.location.href = "gallery.html";
+                }, 600);
+            } else {
+                error.style.display = "block";
+                box.classList.add("shake");
+                setTimeout(() => box.classList.remove("shake"), 400);
+            }
+        }
+    </script>
+
+</body>
+
+</html>

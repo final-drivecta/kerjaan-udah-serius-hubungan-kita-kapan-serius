@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>VS Code — app.js</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            font-family: 'JetBrains Mono', monospace;
+            height: 100vh;
+        }
+
+        .editor {
+            display: flex;
+            height: 100%;
+        }
+
+        .lines {
+            background: #252526;
+            padding: 15px 12px;
+            text-align: right;
+            color: #858585;
+            user-select: none;
+        }
+
+        .code {
+            padding: 15px;
+            white-space: pre;
+            overflow: auto;
+            flex: 1;
+        }
+
+        .keyword {
+            color: #c586c0;
+        }
+
+        .string {
+            color: #ce9178;
+        }
+
+        .func {
+            color: #dcdcaa;
+        }
+
+        .comment {
+            color: #6a9955;
+        }
+
+        .number {
+            color: #b5cea8;
+        }
+
+        .boolean {
+            color: #569cd6;
+        }
+
+        .status {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: #007acc;
+            color: white;
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        .run {
+            position: fixed;
+            bottom: 40px;
+            right: 20px;
+            background: #0e639c;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .run:hover {
+            background: #1177bb;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="editor">
+        <div class="lines">
+            1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>
+            11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>
+            21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br>29<br>30<br>
+            31<br>32<br>33<br>34<br>35<br>36<br>37<br>38<br>39<br>40<br>
+            41<br>42<br>43<br>44<br>45<br>46<br>47<br>48<br>49<br>50
+        </div>
+
+        <div class="code">
+            <span class="comment">// app.js</span>
+            <span class="comment">// Main application entry point</span>
+
+            <span class="keyword">const</span> CONFIG = {
+            env: <span class="string">"production"</span>,
+            apiUrl: <span class="string">"https://api.example.com"</span>,
+            timeout: <span class="number">5000</span>,
+            retry: <span class="number">3</span>
+            };
+
+            <span class="keyword">class</span> <span class="func">HttpClient</span> {
+            <span class="keyword">constructor</span>(baseUrl) {
+            <span class="keyword">this</span>.baseUrl = baseUrl;
+            }
+
+            <span class="keyword">async</span> <span class="func">get</span>(endpoint) {
+            <span class="keyword">try</span> {
+            <span class="keyword">const</span> response = <span class="keyword">await</span> fetch(
+            <span class="keyword">this</span>.baseUrl + endpoint
+            );
+            <span class="keyword">return</span> <span class="keyword">await</span> response.json();
+            } <span class="keyword">catch</span> (error) {
+            <span class="func">console</span>.error(error);
+            <span class="keyword">throw</span> error;
+            }
+            }
+            }
+
+            <span class="keyword">const</span> api = <span class="keyword">new</span> <span
+                class="func">HttpClient</span>(CONFIG.apiUrl);
+
+            <span class="keyword">function</span> <span class="func">delay</span>(ms) {
+            <span class="keyword">return</span> <span class="keyword">new</span> Promise(resolve =>
+            setTimeout(resolve, ms)
+            );
+            }
+
+            <span class="keyword">async</span> <span class="keyword">function</span> <span
+                class="func">bootstrap</span>() {
+            <span class="func">console</span>.log(<span class="string">"Initializing application..."</span>);
+
+            <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt;
+            CONFIG.retry; i++) {
+            <span class="keyword">try</span> {
+            <span class="keyword">const</span> status = <span class="keyword">await</span> api.get(<span
+                class="string">"/status"</span>);
+            <span class="keyword">if</span> (status.ok === <span class="boolean">true</span>) {
+            <span class="func">console</span>.log(<span class="string">"Service connected"</span>);
+            <span class="keyword">break</span>;
+            }
+            } <span class="keyword">catch</span> {
+            <span class="func">console</span>.warn(<span class="string">"Retrying connection..."</span>);
+            <span class="keyword">await</span> delay(CONFIG.timeout);
+            }
+            }
+
+            <span class="func">initializeModules</span>();
+            }
+
+            <span class="keyword">function</span> <span class="func">initializeModules</span>() {
+            <span class="keyword">const</span> modules = [
+            <span class="string">"auth"</span>,
+            <span class="string">"router"</span>,
+            <span class="string">"store"</span>,
+            <span class="string">"ui"</span>
+            ];
+
+            modules.forEach(module => {
+            <span class="func">console</span>.log(<span class="string">`Loading module: ${module}`</span>);
+            });
+            }
+
+            <span class="comment">// Start application</span>
+            <span class="func">bootstrap</span>();
+        </div>
+    </div>
+
+    <div class="run" onclick="runProject()">▶ RUN</div>
+
+    <div class="status">
+        Ln 50, Col 1 | UTF-8 | JavaScript
+    </div>
+
+    <script>
+        document.addEventListener("keydown", e => {
+            if (e.key === "Enter") {
+                runProject();
+            }
+        });
+
+        function runProject() {
+            window.location.href = "splash.html";
+        }
+    </script>
+
+</body>
+
+</html>

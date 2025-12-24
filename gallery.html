@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Our Memories</title>
+    <link href="https://fonts.cdnfonts.com/css/vcr-osd-mono" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            background: #0b0b0f;
+            color: white;
+            font-family: 'Courier New', monospace;
+        }
+
+        h1 {
+            text-align: center;
+            font-family: 'VCR OSD Mono', monospace;
+            color: #ff7ad9;
+            margin: 30px 0;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            padding: 20px;
+        }
+
+        .gallery img {
+            width: 100%;
+            border-radius: 12px;
+            border: 2px solid #cdb4ff;
+        }
+
+        /* === MODAL POPUP === */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: .3s ease;
+            z-index: 99;
+        }
+
+        .modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal img {
+            max-width: 80%;
+            max-height: 80%;
+            border-radius: 16px;
+            border: 2px solid #ff7ad9;
+            animation: zoom .4s ease;
+            cursor: pointer;
+        }
+
+        @keyframes zoom {
+            from {
+                transform: scale(.6);
+                opacity: 0
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1
+            }
+        }
+
+        .close {
+            position: absolute;
+            top: 25px;
+            right: 30px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #ff7ad9;
+        }
+
+
+        /* LETTER */
+        .letter {
+            max-width: 500px;
+            margin: 30px auto;
+            padding: 25px;
+            background: rgba(255, 255, 255, .05);
+            border-radius: 16px;
+            border: 2px dashed #ff7ad9;
+        }
+
+        .footer {
+            text-align: center;
+            margin: 30px;
+            font-size: 12px;
+            color: #aaa;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>CTA = CALL TO AFFECTION
+    </h1>
+
+    <div class="gallery">
+        <img src="1.jpeg" onclick="openModal(this.src)">
+        <img src="2.jpeg" onclick="openModal(this.src)">
+        <img src="3.jpeg" onclick="openModal(this.src)">
+        <img src="4.jpeg" onclick="openModal(this.src)">
+    </div>
+
+    <div class="letter">
+        <h3>Suka nggak sama final CTA hasil lembur kita?</h3>
+        <p>
+            Hi<br><br>
+            Kalau suka, boleh kali luangin waktu buat pilih salah satu foto kita disana :p<br><br>
+
+        </p>
+    </div>
+
+    <div class="footer">
+        🔐 Secret page unlocked successfully
+    </div>
+
+    <div class="modal" id="modal">
+        <span class="close" onclick="closeModal()">✖</span>
+        <img id="modalImg" onclick="goToLetter()">
+    </div>
+
+</body>
+
+
+<script>
+    function openModal(src) {
+        document.getElementById('modal').classList.add('active');
+        document.getElementById('modalImg').src = src;
+    }
+
+    function closeModal() {
+        document.getElementById('modal').classList.remove('active');
+    }
+
+    function goToLetter() {
+        window.location.href = "date.html";
+    }
+</script>
+
+</html>

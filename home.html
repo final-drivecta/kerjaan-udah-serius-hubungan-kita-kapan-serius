@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Player 1</title>
+
+    <link href="https://fonts.cdnfonts.com/css/vcr-osd-mono" rel="stylesheet">
+
+    <style>
+        :root {
+            --pink: #ff7ad9;
+            --purple: #cdb4ff;
+            --bg: #0b0b0f;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: radial-gradient(circle at top, #1a1a2e, var(--bg));
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            animation: fadeIn 1.2s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .container {
+            max-width: 400px;
+            padding: 32px;
+            border: 2px solid var(--purple);
+            border-radius: 18px;
+            box-shadow: 0 0 30px rgba(205, 180, 255, .35);
+            background: rgba(255, 255, 255, .05);
+            animation: popUp .8s ease;
+        }
+
+        @keyframes popUp {
+            from {
+                transform: scale(.9);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .title {
+            font-family: 'VCR OSD Mono', monospace;
+            font-size: 28px;
+            color: var(--pink);
+            text-shadow: 0 0 15px var(--purple);
+        }
+
+        .marquee {
+            margin: 18px 0 25px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: scroll 14s linear infinite;
+            font-family: 'VCR OSD Mono', monospace;
+            color: var(--purple);
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .score {
+            margin: 15px 0 20px;
+            font-family: 'VCR OSD Mono', monospace;
+            color: var(--pink);
+            transition: .3s;
+        }
+
+        .score.bump {
+            transform: scale(1.2);
+        }
+
+        button {
+            margin: 10px 0;
+            padding: 14px 34px;
+            border: none;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 16px;
+            background: linear-gradient(135deg, var(--pink), var(--purple));
+            color: black;
+            transition: transform .2s, box-shadow .2s, opacity .2s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 22px var(--pink);
+        }
+
+        button:active {
+            transform: scale(.95);
+        }
+
+        .secret {
+            opacity: 0;
+            transform: scale(.8);
+            pointer-events: none;
+            transition: .6s ease;
+            margin-top: 10px;
+        }
+
+        .secret.show {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #aaa;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="title">JANGAN SOK SIBUK, TAP INI AJA 7 KALI</div>
+
+        <div class="marquee">
+            <span>CTA KITA UDAH BERHASIL, HUBUNGAN KITA KAPAN?</span>
+        </div>
+
+        <div class="score" id="scoreBox">
+            MAU DIPELUK BERAPA KALI: <span id="score">0</span>
+        </div>
+
+        <button onclick="addScore()">AMBIL PROMO (RYUKEN) MU SEKARANG</button>
+
+        <div class="secret" id="secret">
+            <a href="unlock.html">
+                <button>JANGAN SAMPAI PROMO (RYUKEN) DIAMBIL ORANG</button>
+            </a>
+        </div>
+
+        <div class="footer">
+            DIBUAT SALAH SATU TIM ENGINEERING (RYUKEN)
+        </div>
+    </div>
+
+    <script>
+        let score = 0;
+
+        function addScore() {
+            score++;
+            document.getElementById('score').innerText = score;
+
+            // score bump animation
+            const scoreBox = document.getElementById('scoreBox');
+            scoreBox.classList.add('bump');
+            setTimeout(() => scoreBox.classList.remove('bump'), 200);
+
+            // show secret smoothly
+            if (score >= 7) {
+                document.getElementById('secret').classList.add('show');
+            }
+        }
+    </script>
+
+</body>
+
+</html>
